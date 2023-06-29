@@ -22,19 +22,6 @@ export class AuthService {
     })
   }
 
-  // login(email: string, password: string) {
-  //   return this.http
-  //     .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
-  //     .pipe(
-  //       tap((res) => {
-  //         if (res.token) {
-  //           localStorage.setItem('del_meetups_auth_token', res.token);
-  //         }
-  //         return null;
-  //       })
-  //     );
-  // }
-
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
     this.router.navigate(['login']);

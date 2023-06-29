@@ -59,8 +59,10 @@
   &__management {
     margin-left: auto;
     margin-right: 0;
+    display: flex;
     img {
       margin-left: 1.36rem;
+      cursor: pointer;
     }
   }
 
