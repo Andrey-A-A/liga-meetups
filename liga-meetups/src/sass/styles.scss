@@ -1,7 +1,7 @@
-@import '../src/sass/reset';
-@import '../src/sass/variables';
-@import '../src/sass/mixins';
-@import '../src/sass/fonts';
+@import './reset';
+@import './variables';
+@import './mixins';
+@import './fonts';
 
 /* Обнуление */
 // *,
@@ -42,3 +42,4 @@ body {
   background: #1E1E1E;
   color: $light;
 }
+

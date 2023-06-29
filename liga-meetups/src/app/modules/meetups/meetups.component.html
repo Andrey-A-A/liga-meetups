@@ -1,0 +1,16 @@
+<div>
+  <ul>
+    <li *ngFor="let meetup of dataSource">
+      <app-meetup [meetup]="meetup"></app-meetup>
+    </li>
+  </ul>
+  <mat-paginator class="pagination" [length] = "allList.length"
+              [pageSizeOptions]="[5, 10, 20]"
+              [showFirstLastButtons]="true"
+              [pageSize]="pageSize"
+              aria-label = "Выберите страницу"
+              [pageIndex]="currentPage"
+              (page)="handlePage($event)" >
+  </mat-paginator >
+  <app-meetup></app-meetup>
+</div>
