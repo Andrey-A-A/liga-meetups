@@ -10,13 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptors';
 import { NavbarComponent } from './modules/navbar/navbar.component';
-import { LogoutComponent } from './modules/auth/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LogoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@
       font-size: 18px;
       line-height: 25px;
       margin-bottom: 1.63rem;
+      padding-left: 5px;
     }
   }
   &__link {
@@ -33,6 +34,7 @@
       line-height: 25px;
       text-decoration-line: underline;
       color: #008697;
+      cursor: pointer;
     }
     button {
       background: $indigo;
@@ -46,6 +48,7 @@
       font-size: 18px;
       line-height: 25px;
       color: $white;
+      cursor: pointer;
     }
   }
 }

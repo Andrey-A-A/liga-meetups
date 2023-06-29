@@ -14,8 +14,18 @@ export class NavbarComponent {
   }
 
 
-  public needDisplay() {
+  public isAdmin() {
     return this.authService.isAdmin()
   }
 
+  public LogOut() {
+    this.authService.logout()
+  }
+
+  public isAuthorised() {
+    if (this.authService.getToken()) {
+      return true
+    } else return false
+    // return this.authService.getToken !== null
+  }
 }
