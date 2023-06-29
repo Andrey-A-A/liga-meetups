@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="header__wrap">
+    <h1>{{ appTitle }}</h1>
+    <div class="header__logo">
+      <img src="../../../assets/it-philosophy.png" alt="ИТ ФИЛОСОФИЯ">
+      <img src="../../../assets/liga.png" alt="ЛИГА ЦИФРОВОЙ ЭКОНОМИКИ">
+    </div>
+    <nav class="header__nav">
+      <a routerLink="all-meetups">Все митапы</a>
+      <a routerLink="my-meetups">Мои митапы</a>
+      <a *ngIf="needDisplay()"  routerLink="users">Пользователи</a>
+    </nav>
+    <div class="header__management">
+      <img src="../../../assets/gear.svg" alt="настройки">
+      <a routerLink="login">
+        <img src="../../../assets/entry.svg" alt="вход">
+      </a>
+      <a routerLink="logout">
+        <img src="../../../assets/logout.svg" alt="выход">
+      </a>
+
+    </div>
+  </div>
+</header>

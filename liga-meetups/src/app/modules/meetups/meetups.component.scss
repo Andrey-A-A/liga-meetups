@@ -1,0 +1,28 @@
+@import '../../../sass/variables';
+
+div {
+  .pagination {
+    background: $gray;
+    border: 1px solid $dark;
+    margin: 44px auto 20px auto;
+    width: 95%;
+    // color: $white;
+    // .previousPageLabel {
+    //   background-color: red;
+    //   color: red;
+    // }
+    // /deep/ .mat-mdc-paginator-icon {
+    //   background-color: red;
+    //   color: red;
+    //   stroke: red
+
+    // }
+  }
+}
+
+// /deep/ .mat-mdc-paginator-icon {
+//   background-color: red;
+//   color: red;
+//   stroke: red
+
+// }

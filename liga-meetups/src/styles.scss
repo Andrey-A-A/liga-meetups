@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../src/sass/reset';
+@import '../src/sass/variables';
+@import '../src/sass/mixins';
+@import '../src/sass/fonts';
+
+/* Обнуление */
+// *,
+// *::before,
+// *::after {
+// 	padding: 0;
+// 	margin: 0;
+// 	border: 0;
+// 	box-sizing: border-box;
+// }
+// a {
+// 	text-decoration: none;
+// }
+// ul,
+// ol,
+// li {
+// 	list-style: none;
+// }
+// img {
+// 	vertical-align: text-top;
+// }
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+// 	font-weight: inherit;
+// 	font-size: inherit;
+// }
+/* -----------------*/
+
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: #1E1E1E;
+  color: $light;
+}

@@ -1,0 +1,16 @@
+<div class="login__container">
+  <div class="login form">
+    <form action="#">
+      <input type="text" placeholder=" email" name="email" [(ngModel)]="email">
+      <input type="password" placeholder=" password" name="password" [(ngModel)]="password">
+      <div class="login__link">
+        <a routerLink="login">
+          How to create<br>account?
+        </a>
+        <button  type="submit" (click)="Login()">Log In</button>
+      </div>
+
+      <button  type="submit" (click)="Logout()">Выход</button>
+    </form>
+  </div>
+</div>

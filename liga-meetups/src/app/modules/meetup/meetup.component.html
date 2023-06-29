@@ -1,1 +1,44 @@
-<div>meetup works!</div>
+
+
+<div class="cont" *ngIf="meetup">
+  <div class="header">
+    <h3>{{ meetup.title }}</h3>
+    <p>{{ meetup.subscribers }} подписчик</p>
+    <!-- <div>{{ meetupService.getById(1).date | date: 'dd MMM yyyy hh mm' }}</div> -->
+    <!-- <div>{{ meetupService.getById(1).date | date:'short' }}</div> -->
+    <div>
+      {{ meetup.time | date:'dd.MM.yy HH:mm'}}
+      <p *ngIf="meetup.status !== statusNew">{{meetup.status}}</p>
+      <p *ngIf="meetup.status !== statusDone && meetup.location"
+      class="location">{{ meetup.location }}</p>
+      <p *ngIf="meetup.status !== statusDone && !meetup.location" class="unknow">место неизвестно</p>
+    </div>
+  </div>
+  <div *ngIf="!isFull" class="description">{{meetup.description}}</div>
+  <div *ngIf="isFull" class="fulldescription">
+    <p>{{meetup.fullDescription}}</p>
+    <h3>Целевая аудитория</h3>
+    <p>{{meetup.targetAudience}}</p>
+    <h3>Что надо знать?</h3>
+    <p>{{meetup.needToNow}}</p>
+    <h3>Что будет?</h3>
+    <p>{{meetup.willHappen}}</p>
+    <h3>Почему надо обязательно прийти?</h3>
+    <p>{{meetup.reasonToCome}}</p>
+  </div>
+  <div class="footer">
+    <div>
+      <img src="../../../assets/men.svg" alt="автор" width="25px" height="25px">
+      <p>{{ meetup.author }}</p>
+    </div>
+    <div>
+      <button *ngIf="meetup.status === statusNew" class="btn" type="button">Я пойду!</button>
+      <button class="mark" type="button" (click)="fullContent()">
+        <img *ngIf="!isFull" src="../../../assets/check-down.png" alt="галочка">
+        <img *ngIf="isFull" src="../../../assets/check-up.png" alt="галочка">
+      </button>
+    </div>
+
+  </div>
+</div>
+
