@@ -3,6 +3,7 @@ import { Meetup, MeetupStatus } from "../interfaces/meetup.interface";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MeetupDTO, UserDTO } from '../interfaces/meetupDTO.interface';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -12,50 +13,11 @@ export class MeetupService {
 
   baseUrl: string = `${environment.backendOrigin}/meetup`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
 
   }
 
-  private meetups: Meetup[] = [
-    // {
-    //   id: 1,
-    //   title: 'Angular vs react',
-    //   subscribers: 351,
-    //   description: 'Расскажу о том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом.',
-    //   fullDescription: 'Полный текст',
-    //   targetAudience: 'переговорная 14',
-    //   needToNow: '1. вот это\n 2. вот это',
-    //   willHappen: '1. вот это\n 2. вот это',
-    //   reasonToCome: 'У меня красный пояс по C++ ',
-    //   time: '14.08.22 13:00',
-    //   author: 'Александр Козаченко',
-    //   // isFull: false,
-    //   status: MeetupStatus.New,
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Angular vs Vue',
-    //   subscribers: 351,
-    //   description: 'Расскажу о том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом. О том, об этом.',
-    //   fullDescription: 'Полный текст',
-    //   targetAudience: 'переговорная 14',
-    //   needToNow: '1. вот это\n 2. вот это',
-    //   willHappen: '1. вот это\n 2. вот это',
-    //   reasonToCome: 'У меня красный пояс по C++ ',
-    //   time: '14.08.22 13:00',
-    //   author: 'Александр Козаченко',
-    //   // isFull: false,
-    //   status: MeetupStatus.New
-    // },
-  ]
-
-  getList() {
-    return this.meetups
-  }
-
-  setList(list: Meetup[]) {
-    this.meetups = list
-  }
+  private meetups: Meetup[] = [ ]
 
   getListHTTP() {
     return this.http
@@ -64,6 +26,14 @@ export class MeetupService {
 
   createMeetup(meetup: MeetupDTO) {
     return this.http.post<MeetupDTO>(`${this.baseUrl}`,  meetup )
+  }
+
+  registerToMeetup(idMeetup: number, idUser: number) {
+    return this.http.put<MeetupDTO>(`${this.baseUrl}`, {idMeetup: idMeetup, idUser: idUser})
+  }
+
+  unRegisterMeetup(idMeetup: number, idUser: number) {
+    return this.http.delete<MeetupDTO>(`${this.baseUrl}`, {body:{idMeetup: idMeetup, idUser: idUser}})
   }
 
   getById(id: number) {
@@ -84,12 +54,14 @@ export class MeetupService {
       time: new Date(dto.time),
       author: dto.owner!.fio,
       location: dto.location,
-      // isFull: false,
-      status: this.getStatus(dto.time, dto.duration)
+      status: this.getStatus(dto.time, dto.duration),
+      isMember: this.isMember(dto),
+      isOwner: this.isOwner(dto),
     }
   }
 
-  getStatus(dateStr: string, duration: number): MeetupStatus {
+
+  private getStatus(dateStr: string, duration: number): MeetupStatus {
 
     let startTime:Date = new Date(dateStr)
 
@@ -105,6 +77,20 @@ export class MeetupService {
       return MeetupStatus.Done
     }
 
+  }
+
+  isMember(meetup: MeetupDTO): boolean {
+    if (meetup.users?.find((currentUser:UserDTO) => {
+      return this.authService.user?.id === currentUser.id
+    })?.id) {
+      return true
+    } else return false
+  }
+
+  isOwner(meetup: MeetupDTO): boolean {
+    if (this.authService.user?.id === meetup.createdBy) {
+      return true
+    } else return false
   }
 
 }

@@ -9,13 +9,19 @@ export interface Meetup {
   reasonToCome: string,
   time: Date,
   author: string,
-  // isFull: boolean,
   location?: string,
   status: MeetupStatus,
+  isMember: boolean,
+  isOwner: boolean,
 }
 
 export enum MeetupStatus {
   New = "новый",
   Done = "проведено",
   OnAir = "идет сейчас",
+}
+
+export enum FromPage {
+  AllMeetups,
+  MyMeetups,
 }

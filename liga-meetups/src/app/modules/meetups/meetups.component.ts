@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, DoCheck, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked,  DoCheck, OnInit, SimpleChanges } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service'
 import { MeetupDTO } from '../../interfaces/meetupDTO.interface';
-import { Meetup } from "../../interfaces/meetup.interface";
+import { Meetup, FromPage } from "../../interfaces/meetup.interface";
 import { Router } from '@angular/router';
 import { delay, filter, map, max, reduce } from 'rxjs/operators';
 import { from, of, first, take,  } from 'rxjs';
@@ -12,11 +12,11 @@ import { from, of, first, take,  } from 'rxjs';
   styleUrls: ['./meetups.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class MeetupsComponent implements OnInit, DoCheck, AfterContentChecked{
+export class MeetupsComponent implements OnInit {
 
   public allList: Meetup[] = []
   public dataSource: Meetup[] = [];
-
+  public fromPage = FromPage.AllMeetups;
   public pageSize = 5;
   public currentPage = 0;
   public totalSize = 0;
@@ -63,14 +63,6 @@ export class MeetupsComponent implements OnInit, DoCheck, AfterContentChecked{
     const start = this.currentPage * this.pageSize;
     const part = this.allList.slice(start, end);
     this.dataSource = part;
-  }
-
-  ngDoCheck(): void {
-    // console.log('ChildComponent ngDoCheck');
-  }
-
-  ngAfterContentChecked(): void {
-    // console.log('ChildComponent ngAfterContentChecked');
   }
 
   test():void {
