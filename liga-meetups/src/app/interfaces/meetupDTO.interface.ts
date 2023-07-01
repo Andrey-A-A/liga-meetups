@@ -1,5 +1,5 @@
 export interface MeetupDTO {
-  id: number,
+  id?: number,
   name: string,
   description: string,
   location: string,
@@ -9,10 +9,10 @@ export interface MeetupDTO {
   reason_to_come: string,
   time: string,
   duration: number,
-  createdBy: number,
-  createdAt: string,
-  users: UserDTO[],
-  owner: OwnerDTO,
+  createdBy?: number,
+  createdAt?: string,
+  users?: UserDTO[],
+  owner?: OwnerDTO,
 }
 
 export interface UserDTO {

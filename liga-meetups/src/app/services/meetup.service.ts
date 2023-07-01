@@ -62,6 +62,10 @@ export class MeetupService {
     .get<MeetupDTO[]>(`${this.baseUrl}`)
   }
 
+  createMeetup(meetup: MeetupDTO) {
+    return this.http.post<MeetupDTO>(`${this.baseUrl}`,  meetup )
+  }
+
   getById(id: number) {
     const index = this.meetups.findIndex(t => t.id === id);
     return this.meetups[index];
@@ -69,14 +73,16 @@ export class MeetupService {
 
   public transform(dto: MeetupDTO):Meetup {
     return {
-      id: dto.id,
+      id: dto.id!,
       title: dto.name,
-      subscribers: dto.users.length,
-      needToNow: dto.need_to_know,
+      description: dto.description,
+      subscribers: dto.users!.length,
+      needToKnow: dto.need_to_know,
       willHappen: dto.will_happen,
+      targetAudience: dto.target_audience,
       reasonToCome: dto.reason_to_come,
       time: new Date(dto.time),
-      author: dto.owner.fio,
+      author: dto.owner!.fio,
       location: dto.location,
       // isFull: false,
       status: this.getStatus(dto.time, dto.duration)
