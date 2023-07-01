@@ -4,7 +4,7 @@
       <app-meetup [meetup]="meetup" [fromPage]="fromPage"></app-meetup>
     </li>
   </ul>
-  <mat-paginator class="pagination" [length] = "allList.length"
+  <mat-paginator class="pagination" [length] = "myMeetupList.length"
               [pageSizeOptions]="[5, 10, 20]"
               [showFirstLastButtons]="true"
               [pageSize]="pageSize"
