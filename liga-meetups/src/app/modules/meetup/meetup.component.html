@@ -4,8 +4,6 @@
   <div class="header">
     <h3>{{ meetup.title }}</h3>
     <p>{{ meetup.subscribers }} подписчик</p>
-    <!-- <div>{{ meetupService.getById(1).date | date: 'dd MMM yyyy hh mm' }}</div> -->
-    <!-- <div>{{ meetupService.getById(1).date | date:'short' }}</div> -->
     <div>
       {{ meetup.time | date:'dd.MM.yy HH:mm'}}
       <p *ngIf="meetup.status !== statusNew">{{meetup.status}}</p>
@@ -16,11 +14,11 @@
   </div>
   <div *ngIf="!isFull" class="description">{{meetup.description}}</div>
   <div *ngIf="isFull" class="fulldescription">
-    <p>{{meetup.fullDescription}}</p>
+    <p>{{meetup.description}}</p>
     <h3>Целевая аудитория</h3>
     <p>{{meetup.targetAudience}}</p>
     <h3>Что надо знать?</h3>
-    <p>{{meetup.needToNow}}</p>
+    <p>{{meetup.needToKnow}}</p>
     <h3>Что будет?</h3>
     <p>{{meetup.willHappen}}</p>
     <h3>Почему надо обязательно прийти?</h3>

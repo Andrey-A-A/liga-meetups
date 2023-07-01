@@ -36,9 +36,6 @@ export class MeetupsComponent implements OnInit, DoCheck, AfterContentChecked{
 
       let meetups: MeetupDTO[] = res;
 
-      this.meetupService.setList(meetups.map(el => {
-        return this.meetupService.transform(el)
-      }))
 
       this.allList = meetups.map(el => {
         return this.meetupService.transform(el)
