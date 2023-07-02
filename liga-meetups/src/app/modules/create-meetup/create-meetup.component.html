@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Создание митапа</h1>
+  <h1 *ngIf="isEditMode">Редактирование митапа</h1>
+  <h1 *ngIf="!isEditMode">Создание митапа</h1>
 
   <form [formGroup]="createMeetupForm" (submit)="onSubmit()">
     <ul class="wrapper">

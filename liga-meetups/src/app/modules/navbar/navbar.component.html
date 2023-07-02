@@ -11,7 +11,7 @@
       <a *ngIf="isAdmin()" routerLink="users">Пользователи</a>
     </nav>
     <div class="header__management">
-      <a routerLink="create-meetup">
+      <a routerLink="meetup">
         <img src="../../../assets/gear.svg" alt="настройки">
       </a>
       <a *ngIf="!isAuthorised()" class="header__login" routerLink="login">
