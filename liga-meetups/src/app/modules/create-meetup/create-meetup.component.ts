@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 import { MeetupDTO } from 'src/app/interfaces/DTO.interface';
+import { Meetup } from 'src/app/interfaces/meetup.interface';
 import { MeetupService } from 'src/app/services/meetup.service';
 import { Time } from '@angular/common';
 
@@ -13,47 +14,45 @@ import { Time } from '@angular/common';
 export class CreateMeetupComponent implements OnInit{
 
   createMeetupForm!: FormGroup;
-
-  // createMeetupForm!: FormGroup<{
-  //   title: FormControl<string | null>;
-  //   date: FormControl<string | null>;
-  //   time: FormControl<string | null>;
-  //   location: FormControl<string | null>;
-  //   description: FormControl<string | null>;
-  //   targetAudience: FormControl<string | null>;
-  //   needToKnow: FormControl<string | null>;
-  //   willHappen: FormControl<string | null>;
-  //   reasonToCome: FormControl<string | null>;
-  // }>
+  isEditMode: boolean = false;
+  meetup?: Meetup;
 
   constructor(private fb: FormBuilder, private meetupService: MeetupService, private router: Router) {}
 
   ngOnInit() {
+    const meetupToEdit = localStorage.getItem('meetupToEdit')
+    if (meetupToEdit) {
+      this.meetup = JSON.parse(meetupToEdit);
+      localStorage.removeItem(meetupToEdit);
+      this.isEditMode = true;
+    }
+    console.log('this.meetup=',this.meetup);
+
     this.initForm()
   }
 
   initForm() {
     this.createMeetupForm = this.fb.group({
-      title: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-      time: ['', [Validators.required]],
-      duration: ['', [
+      title: [this.meetup?.title, [Validators.required]],
+      date: [this.getDate(this.meetup?.time), [Validators.required]],
+      time: [this.getTime(this.meetup?.time), [Validators.required]],
+      duration: [this.meetup?.duration, [
         Validators.required,
         Validators.min(10),
         Validators.max(120)
       ]],
-      location: ['', [
+      location: [this.meetup?.location, [
         Validators.required,
         Validators.minLength(4)
       ]],
-      description: ['', [
+      description: [this.meetup?.description, [
         Validators.required,
         Validators.maxLength(255)
       ]],
-      targetAudience: ['', [Validators.required]],
-      needToKnow: ['', [Validators.required]],
-      willHappen: ['', [Validators.required]],
-      reasonToCome: ['', [Validators.required]],
+      targetAudience: [this.meetup?.targetAudience, [Validators.required]],
+      needToKnow: [this.meetup?.needToKnow, [Validators.required]],
+      willHappen: [this.meetup?.willHappen, [Validators.required]],
+      reasonToCome: [this.meetup?.reasonToCome, [Validators.required]],
     })
   }
 
@@ -65,6 +64,7 @@ export class CreateMeetupComponent implements OnInit{
     return result;
   }
 
+
   onSubmit() {
 
     this.findInvalidControls()
@@ -73,6 +73,7 @@ export class CreateMeetupComponent implements OnInit{
     } else {
 
       const requestBody: MeetupDTO = {
+        id: this.meetup?.id,
         name: this._title?.getRawValue(),
         description: this._description?.getRawValue(),
         duration: 90,
@@ -84,19 +85,45 @@ export class CreateMeetupComponent implements OnInit{
 
         reason_to_come: this._reasonToCome?.getRawValue()
       }
-      this.meetupService.createMeetup(requestBody).subscribe((res: MeetupDTO) => {
+      if (this.isEditMode) {
+        this.meetupService.editMeetup(requestBody).subscribe((res) => {
+          if (res.id) {
+            setTimeout(() => {this.router.navigate(['my-meetups'])}, 500)
+          } else {
+            alert('Не удалось отредактировать митап');
+          }
+        })
+      } else {
+        this.meetupService.createMeetup(requestBody).subscribe((res: MeetupDTO) => {
 
-        if (res.id) {
-          setTimeout(() => {this.router.navigate(['all-meetups'])}, 500)
-        } else {
-          alert('Не удалось создать митап')
-        }
-        console.log('res=', res);
-      })
+          if (res.id) {
+            setTimeout(() => {this.router.navigate(['my-meetups'])}, 500)
+          } else {
+            alert('Не удалось создать митап')
+          }
+          console.log('res=', res);
+        })
+      }
+
     }
   }
 
+  getDate(date?: Date):string {
+    if (date) {
+      const dateObj = new Date(date)
+      return dateObj.toISOString().substring(0, 10)
 
+    } else return ''
+  }
+
+  getTime(date?: Date):string {
+    if (date) {
+      const dateObj = new Date(date);
+      const hours = dateObj.getUTCHours();
+      const minutes = dateObj.getUTCMinutes();
+      return `${hours}:${minutes}`;
+    } else return ''
+  }
 
   get _title() {
     return this.createMeetupForm.get('title')
@@ -154,6 +181,8 @@ export class CreateMeetupComponent implements OnInit{
     const timeString = `${date}T${time}:00.000Z`
     return timeString;
   };
+
+
 }
 
 

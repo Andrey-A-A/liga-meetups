@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'all-meetups', component: MeetupsComponent },
   { path: 'my-meetups', component: MyMeetupsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'create-meetup', component: CreateMeetupComponent },
+  { path: 'meetup', component: CreateMeetupComponent },
   { path: 'users', component: UsersComponent },
 ];
 

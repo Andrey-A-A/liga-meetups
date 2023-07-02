@@ -45,6 +45,11 @@ export class MeetupComponent {
       }
     })
   }
-  public edit() {}
+  public edit() {
+    localStorage.setItem('meetupToEdit', JSON.stringify(this.meetup) )
+    this.router.navigate(['meetup']);
+  }
+
+
 
 }

@@ -7,6 +7,7 @@ export interface Meetup {
   needToKnow: string,
   willHappen: string,
   reasonToCome: string,
+  duration?: number,
   time: Date,
   author: string,
   location?: string,

@@ -52,6 +52,7 @@ export class MeetupService {
       targetAudience: dto.target_audience,
       reasonToCome: dto.reason_to_come,
       time: new Date(dto.time),
+      duration: dto.duration,
       author: dto.owner!.fio,
       location: dto.location,
       status: this.getStatus(dto.time, dto.duration),
@@ -91,6 +92,10 @@ export class MeetupService {
     if (this.authService.user?.id === meetup.createdBy) {
       return true
     } else return false
+  }
+
+  editMeetup(meetup: MeetupDTO) {
+    return this.http.put<MeetupDTO>(`${this.baseUrl}/${meetup.id}`, meetup)
   }
 
 }
