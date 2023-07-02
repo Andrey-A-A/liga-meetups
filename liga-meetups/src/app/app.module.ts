@@ -11,18 +11,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptors';
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { CreateMeetupComponent } from './modules/create-meetup/create-meetup.component';
-// import { MyMeetupsComponent } from './modules/my-meetups/my-meetups.component';
+// import { UserComponent } from './modules/user/user.component';
+import { UsersModule } from './modules/users/users.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CreateMeetupComponent,
+    // UserComponent,
     // MyMeetupsComponent,
   ],
   imports: [
     BrowserModule,
     MeetupsModule,
+    UsersModule,
     AppRoutingModule,
     FormsModule,
     AuthModule,

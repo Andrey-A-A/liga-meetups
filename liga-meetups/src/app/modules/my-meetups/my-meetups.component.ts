@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service';
 import { Router } from '@angular/router';
 import { Meetup, FromPage } from "../../interfaces/meetup.interface";
-import { MeetupDTO, UserDTO } from '../../interfaces/meetupDTO.interface';
+import { MeetupDTO, UserDTO } from '../../interfaces/DTO.interface';
 import { AuthService } from '../../services/auth.service';
 
 

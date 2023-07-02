@@ -6,6 +6,7 @@ export interface User {
   roles: Role[]
 }
 
-interface Role {
-  name: string
+export interface Role {
+  id: number,
+  name: string,
 }

@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service'
 import { Meetup, FromPage } from '../../interfaces/meetup.interface'
-import { MeetupDTO } from 'src/app/interfaces/meetupDTO.interface';
+import { MeetupDTO } from 'src/app/interfaces/DTO.interface';
 import { MeetupStatus} from '../../interfaces/meetup.interface'
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router';

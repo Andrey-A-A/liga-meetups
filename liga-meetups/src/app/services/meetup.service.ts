@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Meetup, MeetupStatus } from "../interfaces/meetup.interface";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { MeetupDTO, UserDTO } from '../interfaces/meetupDTO.interface';
+import { MeetupDTO, UserDTO } from '../interfaces/DTO.interface';
 import { AuthService } from './auth.service';
 
 
