@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, AfterContentChecked,  DoCheck, OnInit, SimpleChanges } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service'
-import { MeetupDTO } from '../../interfaces/meetupDTO.interface';
+import { MeetupDTO } from '../../interfaces/DTO.interface';
 import { Meetup, FromPage } from "../../interfaces/meetup.interface";
 import { Router } from '@angular/router';
 import { delay, filter, map, max, reduce } from 'rxjs/operators';

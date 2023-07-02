@@ -19,8 +19,15 @@ export interface UserDTO {
   id: number,
   email: string,
   password: string,
+  fio?: string,
+  roles?: RoleDTO[]
 }
 
 export interface OwnerDTO {
   fio: string
+}
+
+export interface RoleDTO {
+  id: number,
+  name: string,
 }
