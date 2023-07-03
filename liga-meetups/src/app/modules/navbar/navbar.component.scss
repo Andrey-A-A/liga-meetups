@@ -38,9 +38,6 @@
       line-height: 1.5rem;
       margin-right: 2.13rem;
       padding-bottom: 5px;
-      // &:hover {
-      //   border-bottom: 10px solid $orange;
-      // }
       &::after {
         content: '';
         left: -2px;
@@ -55,6 +52,9 @@
         background-color: $orange;
       }
     }
+    a.active {
+      color: $orange
+    }
   }
   &__management {
     margin-left: auto;
@@ -67,3 +67,42 @@
   }
 
 }
+
+@media (max-width: 1200px) {
+  .header {
+    &__wrap {
+      h1 {
+        font-size: 30px;
+        line-height: 70px;
+      }
+    }
+    &__logo {
+      display: none;
+    }
+    &__nav {
+      a {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .header {
+    &__wrap {
+      padding: 0 1rem;
+    }
+    &__nav {
+      margin-left: 4rem;
+    }
+    &__management {
+      img {
+        width: 30px;
+        height: 30px;
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {}

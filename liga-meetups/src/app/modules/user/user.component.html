@@ -4,18 +4,18 @@
       <input [style]="editStyle()" class="inner" type="text" formControlName="email" [readonly]="!editMode">
     </div>
     <div class="outer first">
-      <input class="inner" type="text" formControlName="password" [readonly]="!editMode">
+      <input [style]="editStyle()" class="inner" type="text" formControlName="password" [readonly]="!editMode">
     </div>
     <div class="outer second">
       <div>
-        <select class="select-css"  #mySelect [value]="valueSelect" [disabled]="!editMode" (change)="selectionChange(mySelect.value)">
+        <select [style]="editStyle()" class="select-css"  #mySelect [value]="valueSelect" [disabled]="!editMode" (change)="selectionChange(mySelect.value)">
           <option value="1">User</option>
           <option value="2">Admin</option>
         </select>
       </div>
     </div>
     <div class="outer third">
-      <div>
+      <div class="pushbuttons">
         <button id="cancel" *ngIf="editMode" type="button" (click)="cancelClick()"><img src="../../../assets/close.svg" alt=""></button>
         <button id="save" *ngIf="editMode" type="button" (click)="saveClick()"><img src="../../../assets/confirm.svg" alt=""></button>
         <button id="edit"  *ngIf="!editMode" type="button" (click)="editClick()"><img src="../../../assets/edit.svg" alt=""></button>

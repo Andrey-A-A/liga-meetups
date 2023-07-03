@@ -6,9 +6,14 @@
       <img src="../../../assets/liga.png" alt="ЛИГА ЦИФРОВОЙ ЭКОНОМИКИ">
     </div>
     <nav class="header__nav">
-      <a routerLink="all-meetups">Все митапы</a>
-      <a routerLink="my-meetups">Мои митапы</a>
-      <a *ngIf="isAdmin()" routerLink="users">Пользователи</a>
+      <a *ngIf="status === 1" class="active"  routerLink="all-meetups">Все митапы</a>
+      <a *ngIf="status !== 1" (click)="activeLink(1)" routerLink="all-meetups">Все митапы</a>
+
+      <a *ngIf="status === 2" class="active" routerLink="my-meetups">Мои митапы</a>
+      <a *ngIf="status !== 2" (click)="activeLink(2)" routerLink="my-meetups">Мои митапы</a>
+
+      <a *ngIf="isAdmin() && status === 3" class="active" routerLink="users">Пользователи</a>
+      <a *ngIf="isAdmin() && status !== 3"  (click)="activeLink(3)" routerLink="users">Пользователи</a>
     </nav>
     <div class="header__management">
       <a routerLink="meetup">
@@ -20,8 +25,6 @@
       <a *ngIf="isAuthorised()" class="header__logout" (click)="LogOut()">
         <img src="../../../assets/logout_b.svg" alt="выход" width="49px" height="49px">
       </a>
-
-
     </div>
   </div>
 </header>

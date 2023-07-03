@@ -14,13 +14,16 @@
 
   .header {
     display: flex;
-    align-items: start;
-    h3 {
-      font-family: Cherry Bomb;
-      font-style: normal;
-      font-weight: 400;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
+    align-items: flex-start;
+    .title {
+      max-width: 55%;
+      h3 {
+        font-family: Cherry Bomb;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        }
     }
     p {
       font-family: 'Open Sans';
@@ -55,7 +58,11 @@
       }
     }
   }
+  div.description {
+    max-width: 70%;
+  }
   div.fulldescription {
+    max-width: 70%;
     h3 {
       font-family: 'Open Sans';
       font-style: normal;
@@ -98,4 +105,6 @@
       border-radius: 5px;
     }
   }
+
+
 }
