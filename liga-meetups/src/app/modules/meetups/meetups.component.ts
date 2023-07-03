@@ -5,6 +5,7 @@ import { Meetup, FromPage } from "../../interfaces/meetup.interface";
 import { Router } from '@angular/router';
 import { delay, filter, map, max, reduce } from 'rxjs/operators';
 import { from, of, first, take,  } from 'rxjs';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-meetups',
@@ -22,6 +23,8 @@ export class MeetupsComponent implements OnInit {
   public currentPage = 0;
   public totalSize = 0;
 
+  public isLoading = false;
+
   constructor(public meetupService: MeetupService, private router: Router) {
   }
 
@@ -31,9 +34,9 @@ export class MeetupsComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log('мы в OnInit');
+    this.isLoading = true;
 
-    this.meetupService.getListHTTP().subscribe((res: any) => {
+    this.meetupService.getListHTTP().pipe(delay(1500)).subscribe((res: any) => {
 
       let meetups: MeetupDTO[] = res;
 
@@ -49,6 +52,8 @@ export class MeetupsComponent implements OnInit {
       this.dataSource = this.filteredList.slice(0, this.pageSize)
 
       this.test()
+
+      this.isLoading = false;
     })
 
   }
