@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserDTO } from 'src/app/interfaces/DTO.interface';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { delay } from 'rxjs/operators';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit, OnDestroy{
 
   public allList: User[] = []
   public dataSource: User[] = [];
@@ -16,23 +18,38 @@ export class UsersComponent implements OnInit{
   public currentPage = 0;
   public totalSize = 0;
 
+  public refreshTimer = timer(0, 30000)
+  private subscription: Subscription = this.refreshTimer.subscribe()
+
   constructor(private userService: UserService) {
 
   }
 
   ngOnInit(): void {
 
-    this.userService.getAllUsers().subscribe((res: any) => {
+    this.subscription = this.refreshTimer.subscribe(() => {
+      this.userService.getAllUsers().subscribe((res: any) => {
 
-      let users: UserDTO[] = res;
+        let users: UserDTO[] = res;
 
-      this.allList = users.map((el) => {
-        return this.userService.transform(el)
+        let newList = users.map((el) => {
+          return this.userService.transform(el)
+        })
+
+        if (newList.length !== this.allList.length) {
+          this.allList = users.map((el) => {
+            return this.userService.transform(el)
+          })
+          this.dataSource = this.allList.slice(0, this.pageSize)
+        } else {
+          console.log('данные не изменились');
+        }
       })
-
-      this.dataSource = this.allList.slice(0, this.pageSize)
-
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
   public handlePage(e: any) {
