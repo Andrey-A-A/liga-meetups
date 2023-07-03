@@ -17,8 +17,10 @@ export class AuthService {
     return this.http
     .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
     .subscribe((res: any) => {
-      localStorage.setItem('del_meetups_auth_token', res.token);
-      this.router.navigate(['all-meetups']);
+      if (res?.token) {
+        localStorage.setItem('del_meetups_auth_token', res.token);
+        this.router.navigate(['all-meetups']);
+      } else alert('Ошибка при авторизации')
     })
   }
 
@@ -84,6 +86,18 @@ export class AuthService {
     }
 
     return result;
+  }
+
+  registration(email: string, password: string, fio: string) {
+
+    return this.http
+    .post<{ token: string }>(`${this.baseUrl}/registration`, { email, password, fio })
+    .subscribe((res: any) => {
+      if (res?.token) {
+        this.router.navigate(['login']);
+      } else alert('Ошибка при регистрации')
+
+    })
   }
 
 }

@@ -24,6 +24,9 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
 
+    console.log('мы в гарде');
+
+
     if (this.authService.user) {
       return true;
     } else {
