@@ -12,7 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+
+export class NonAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -24,11 +25,13 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
 
-    if (this.authService.user) {
-      return true;
-    } else {
-      this.router.navigate(['login']);
-      return false;
+      if (this.authService.user) {
+        this.router.navigate(['all-meetups']);
+        return false;
+      } else {
+        return true
+      }
+
     }
-  }
+
 }
