@@ -14,7 +14,8 @@ import { from, of, first, take,  } from 'rxjs';
 })
 export class MeetupsComponent implements OnInit {
 
-  public allList: Meetup[] = []
+  public allList: Meetup[] = [];
+  public filteredList: Meetup[] = [];
   public dataSource: Meetup[] = [];
   public fromPage = FromPage.AllMeetups;
   public pageSize = 5;
@@ -41,9 +42,11 @@ export class MeetupsComponent implements OnInit {
         return this.meetupService.transform(el)
       })
 
-      this.dataSource = this.allList.slice(0, this.pageSize)
-      // console.log('результат приехал');
-      // console.log('list', this.allList)
+      this.filteredList = meetups.map(el => {
+        return this.meetupService.transform(el)
+      })
+
+      this.dataSource = this.filteredList.slice(0, this.pageSize)
 
       this.test()
     })
@@ -61,9 +64,44 @@ export class MeetupsComponent implements OnInit {
   private iterator() {
     const end = (this.currentPage + 1) * this.pageSize;
     const start = this.currentPage * this.pageSize;
-    const part = this.allList.slice(start, end);
+    const part = this.filteredList.slice(start, end);
     this.dataSource = part;
   }
+
+  searchTextUpdated(text: string) {
+    console.log('получили у родителя текст', text);
+    this.filteredList = this.allList.filter(el => {
+      return this.filterText(el?.description, text) || this.filterText(el.title, text) || this.filterText(el.author, text) || this.filterDate(el.time, text)
+    })
+    console.log('filteredList', this.filteredList);
+    this.iterator();
+  }
+
+  private filterText(str: string | null | undefined, text: string): boolean {
+    return str !== null && str !== undefined && str.toLowerCase().indexOf(text.toLowerCase()) !== -1
+  }
+
+  private filterDate(date: Date | null | undefined, text: string): boolean {
+
+    if (date) {
+      const dayText = ('0' + date.getUTCDate()).slice(-2)
+      const monthText = ('0' + (date.getUTCMonth() + 1)).slice(-2)
+
+      const yearText = date.getUTCFullYear().toString().slice(-2);
+      const dateText = `${dayText}.${monthText}.${yearText}`
+      console.log('dateText', dateText);
+      return dateText === text
+    } else {
+      return false
+    }
+
+
+    // return str !== null && str !== undefined && str.toLowerCase().indexOf(text.toLowerCase()) !== -1
+  }
+
+
+
+
 
   test():void {
     this.meetupService.getListHTTP().subscribe((res: MeetupDTO[]) => {

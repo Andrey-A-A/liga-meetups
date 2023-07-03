@@ -1,0 +1,39 @@
+.wrap {
+  padding: 0 24px;
+  margin:  10px auto 0 auto;
+  form {
+    position: relative;
+  }
+}
+
+.d3 {
+  background: #BCB3B3;
+  border-radius: 5px;
+}
+.d3 form {
+  background: #BCB3B3;
+  border-radius: 5px;
+}
+.d3 input, .d3 button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.d3 input {
+  width: 100%;
+  height: 25px;
+  // padding-left: 15px;
+  padding: 24px 15px 24px 13px;
+  // border-radius: 5px;
+}
+.d3 button {
+  height: 42px;
+  width: 42px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.d3 button:before {
+  content: url('../../../assets/search.svg');
+}
