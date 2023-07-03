@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked,  DoCheck, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked,  DoCheck, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service'
 import { MeetupDTO } from '../../interfaces/DTO.interface';
 import { Meetup, FromPage } from "../../interfaces/meetup.interface";
 import { Router } from '@angular/router';
-import { delay, filter, map, max, reduce } from 'rxjs/operators';
-import { from, of, first, take,  } from 'rxjs';
-import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
+import { delay } from 'rxjs/operators';
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-meetups',
@@ -13,7 +12,7 @@ import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
   styleUrls: ['./meetups.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class MeetupsComponent implements OnInit {
+export class MeetupsComponent implements OnInit, OnDestroy {
 
   public allList: Meetup[] = [];
   public filteredList: Meetup[] = [];
@@ -23,7 +22,10 @@ export class MeetupsComponent implements OnInit {
   public currentPage = 0;
   public totalSize = 0;
 
-  public isLoading = false;
+  public isLoading = true;
+
+  public refreshTimer = timer(0, 30000)
+  private subscription: Subscription = this.refreshTimer.subscribe()
 
   constructor(public meetupService: MeetupService, private router: Router) {
   }
@@ -34,28 +36,40 @@ export class MeetupsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.isLoading = true;
 
-    this.meetupService.getListHTTP().pipe(delay(1500)).subscribe((res: any) => {
+    this.subscription = this.refreshTimer.subscribe(() => {
+
+      this.meetupService.getListHTTP().pipe(delay(1500)).subscribe((res: any) => {
 
       let meetups: MeetupDTO[] = res;
 
-
-      this.allList = meetups.map(el => {
+      let newList = meetups.map(el => {
         return this.meetupService.transform(el)
       })
 
-      this.filteredList = meetups.map(el => {
-        return this.meetupService.transform(el)
+      if (newList.length !== this.allList.length) {
+        this.isLoading = true;
+
+        this.allList = meetups.map(el => {
+          return this.meetupService.transform(el)
+        })
+
+        this.filteredList = meetups.map(el => {
+          return this.meetupService.transform(el)
+        })
+
+        this.dataSource = this.filteredList.slice(0, this.pageSize)
+        delay(1500)
+        this.isLoading = false;
+        } else {
+          console.log('данные не изменились');
+        }
       })
-
-      this.dataSource = this.filteredList.slice(0, this.pageSize)
-
-      this.test()
-
-      this.isLoading = false;
     })
+  }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
   public handlePage(e: any) {
@@ -99,51 +113,6 @@ export class MeetupsComponent implements OnInit {
     } else {
       return false
     }
-
-
-    // return str !== null && str !== undefined && str.toLowerCase().indexOf(text.toLowerCase()) !== -1
   }
-
-
-
-
-
-  test():void {
-    this.meetupService.getListHTTP().subscribe((res: MeetupDTO[]) => {
-      from(res).pipe(
-        filter(i => i.location.includes('переговорка')),
-        delay(500),
-        map((i:MeetupDTO) => {return this.meetupService.transform(i)}),
-        max((a, b) => a.id - b.id)
-      ).subscribe(i => {
-        console.log('i =', i);
-      })
-      console.log('res', res);
-    })
-
-    of(1, 2, 3, 5, 3, 0, 9, 2, 6, 7, 4)
-      .pipe(
-        take(6),
-        reduce((acc, curr) => acc + curr, 0)
-        )
-      .subscribe((v) => console.log(`value: ${v}`));
-
-      //Промисификация setTimeout(), внутри которого происходит подсчёт суммы элементов массива;
-      const arr = [1, 2, 3, 5, 3, 0, 9, 2, 6, 7, 4]
-
-      const resolveInTwoSeconds = (arr: number[]) => {
-        return new Promise((resolve) => {
-          setTimeout(() => resolve(arr.reduce((acc, curr) => acc + curr, 0)), 2000);
-        })
-      };
-
-      (async function (arr:number[]) {
-        const result = await Promise.all([resolveInTwoSeconds(arr)])
-        console.log('сумма элементов массива', result);
-
-      })(arr)
-
-  }
-
 
 }
