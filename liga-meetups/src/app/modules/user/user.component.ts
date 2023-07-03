@@ -85,7 +85,7 @@ export class UserComponent implements OnInit {
 
   editStyle() {
     if (this.editMode) {
-      return 'border: 1px solid #dcdcdc';
+      return 'border: 3px solid #4C3F78;';
     }
     return ''
   }

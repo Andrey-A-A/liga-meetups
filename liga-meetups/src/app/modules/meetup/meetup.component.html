@@ -2,7 +2,10 @@
 
 <div class="cont" *ngIf="meetup">
   <div class="header">
-    <h3>{{ meetup.title }}</h3>
+    <div class="title">
+      <h3>{{ meetup.title }}</h3>
+    </div>
+
     <p>{{ meetup.subscribers }} подписчик</p>
     <div>
       {{ meetup.time | date:'dd.MM.yy HH:mm'}}

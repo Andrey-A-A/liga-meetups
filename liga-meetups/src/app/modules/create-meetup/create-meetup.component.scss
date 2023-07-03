@@ -43,8 +43,6 @@ input.ng-touched.ng-invalid{
 	border-color: red;
 }
 
-
-
 .wrapper {
   list-style-type: none;
   padding: 0;
@@ -128,9 +126,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
 }
 
-// .form-row.date> div.plug {
-//   flex:1
-// }
 .form-row.date>div {
   flex:3
 }
@@ -173,6 +168,13 @@ div.buttons {
   }
   #time {
     flex-basis: 20%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    padding: 0 30px;
+    font-size: 90%;
   }
 }
 

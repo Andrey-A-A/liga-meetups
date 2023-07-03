@@ -9,10 +9,15 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent {
   appTitle = 'MeetUps';
 
+  public status = 1
+
   constructor(private authService: AuthService) {
 
   }
 
+  public activeLink(status: number) {
+    this.status = status
+  }
 
   public isAdmin() {
     return this.authService.isAdmin()
