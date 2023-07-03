@@ -6,6 +6,7 @@ import { MyMeetupsComponent } from '../my-meetups/my-meetups.component';
 import { SearchComponent } from '../search/search.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const materialModules = [
@@ -21,6 +22,7 @@ const materialModules = [
   ],
   imports: [
     ReactiveFormsModule,
+    SharedModule,
     CommonModule,
       ...materialModules
   ],

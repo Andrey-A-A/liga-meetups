@@ -1,6 +1,10 @@
 @import '../../../sass/variables';
 
 div {
+  h1 {
+    text-align: center;
+    margin: 50px;
+  }
   .pagination {
     background: $gray;
     border: 1px solid $dark;
