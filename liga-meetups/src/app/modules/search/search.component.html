@@ -1,8 +1,6 @@
 <div class="wrap">
-  <div class="d3">
-    <form [formGroup]="searchForm">
-      <input  type="text" formControlName="text" placeholder="Название, ключевое слово, дата (дд.мм.гг)" onchange="parentEvent.emit('value from child')">
-      <button type="submit"></button>
-    </form>
-  </div>
+  <form [formGroup]="searchForm">
+    <input  type="text" formControlName="text" placeholder="Название, ключевое слово, дата (дд.мм.гг)" onchange="parentEvent.emit('value from child')">
+    <button type="submit"></button>
+  </form>
 </div>
