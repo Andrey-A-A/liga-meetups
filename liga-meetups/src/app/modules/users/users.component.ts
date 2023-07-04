@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserDTO } from 'src/app/interfaces/DTO.interface';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/interfaces/user.interface';
-import { delay } from 'rxjs/operators';
 import { timer, Subscription } from 'rxjs';
 
 @Component({

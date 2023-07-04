@@ -46,11 +46,7 @@ export class MyMeetupsComponent implements OnInit {
 
       console.log('myMeetupList', this.myMeetupList);
 
-
       this.dataSource = this.myMeetupList.slice(0, this.pageSize)
-      // console.log('результат приехал');
-      // console.log('list', this.allList)
-
 
     })
 

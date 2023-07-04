@@ -6,7 +6,7 @@
       <img src="../../../assets/liga.png" alt="ЛИГА ЦИФРОВОЙ ЭКОНОМИКИ">
     </div>
     <nav class="header__nav">
-      <a *ngIf="status === 1" class="active"  routerLink="all-meetups">Все митапы</a>
+      <a *ngIf="status === 1" class="active" routerLink="all-meetups">Все митапы</a>
       <a *ngIf="status !== 1" (click)="activeLink(1)" routerLink="all-meetups">Все митапы</a>
 
       <a *ngIf="status === 2" class="active" routerLink="my-meetups">Мои митапы</a>

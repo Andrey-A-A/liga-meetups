@@ -1,6 +1,5 @@
 @mixin btn($bg: $black, $fs: 9px, $lh: 13px, $ls: 0.54px, $fw: 700, $br: 40px, $w: 114px, $pd:13px 0, $clr: $white) {
   width: $w;
-  //height: $h;
   color: $clr;
   font-size: $fs;
   line-height: $lh;
@@ -12,15 +11,8 @@
   display: block;
   text-align: center;
   box-shadow: 0px 4px 4px rgba(62, 5, 4, 0.25);
-  // text-transform: uppercase;
-  // margin: 25px 0;
   text-decoration: none;
-  @content; //в этом месте мы сможем подключать дополнительные стили
-
-  //&:hover {
-    //background-color: lighten($bg, 15%);
-    //
-  //}
+  @content; 
 }
 
 @mixin min-max($min-width, $max-width, $padding) {

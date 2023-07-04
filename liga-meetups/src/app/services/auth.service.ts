@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, tap} from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user.interface';
 
@@ -76,8 +75,7 @@ export class AuthService {
     if (token) {
       const user:User = this.parseJwt(token)
       user.roles.forEach(element => {
-        // console.log('element=', element);
-
+        
         if (element.name === 'ADMIN') {
           result = true
         }

@@ -1,6 +1,5 @@
 <div>
   <app-search (parentEvent)="searchTextUpdated($event)"></app-search>
-  <!-- <h1 *ngIf="isLoading">Загрузка ... </h1> -->
   <app-spinner *ngIf="isLoading"></app-spinner>
   <ul *ngIf="!isLoading">
     <li *ngFor="let meetup of dataSource">

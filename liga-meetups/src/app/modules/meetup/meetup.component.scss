@@ -98,6 +98,10 @@
             }
         };
     }
+    .btn.notcome {
+      background-color: $gray;
+      color: $indigo;
+    }
     .mark {
       width: 70px;
       height: 50px;
@@ -105,6 +109,12 @@
       border-radius: 5px;
     }
   }
+}
 
-
+@media (max-width: 992px) {
+  .btn {
+    font-size: 14px;
+    width: 130px;
+    padding: 10px 0;
+  }
 }
