@@ -10,13 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
 
   registrationForm!: FormGroup
-  // registrationForm!: FormGroup<{
-  //   email: FormControl<string | null>;
-  //   password: FormControl<string | null>;
-  //   confirmPassword: FormControl<string | null>;
-  //   fio: FormControl<string | null>;
-  // }>;
-
+  
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
