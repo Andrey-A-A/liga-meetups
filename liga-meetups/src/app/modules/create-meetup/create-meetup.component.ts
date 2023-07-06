@@ -19,15 +19,15 @@ export class CreateMeetupComponent implements OnInit{
   constructor(private fb: FormBuilder, private meetupService: MeetupService, private router: Router) {}
 
   ngOnInit() {
-    const meetupToEdit = localStorage.getItem('meetupToEdit')
+    const meetupToEdit = this.meetupService.currentEditableMeetup
     if (meetupToEdit) {
-      this.meetup = JSON.parse(meetupToEdit);
-      localStorage.removeItem(meetupToEdit);
+      this.meetup = meetupToEdit
       this.isEditMode = true;
-    }
-    console.log('this.meetup=',this.meetup);
+      this.meetupService.currentEditableMeetup = null
+    } else this.isEditMode = false;
 
     this.initForm()
+
   }
 
   initForm() {
@@ -65,7 +65,6 @@ export class CreateMeetupComponent implements OnInit{
 
 
   onSubmit() {
-
     this.findInvalidControls()
     if (this.createMeetupForm.invalid) {
       alert('Заполните все поля формы')
@@ -81,12 +80,12 @@ export class CreateMeetupComponent implements OnInit{
         need_to_know: this._needToKnow?.getRawValue(),
         will_happen: this._willHappen?.getRawValue(),
         time: this.combineDateAndTime(this._date?.getRawValue(), this._time?.getRawValue()),
-
         reason_to_come: this._reasonToCome?.getRawValue()
       }
-      if (this.isEditMode) {
+      if (this.meetupService.isEditMode) {
         this.meetupService.editMeetup(requestBody).subscribe((res) => {
           if (res.id) {
+            this.meetupService.isEditMode = false;
             setTimeout(() => {this.router.navigate(['my-meetups'])}, 500)
           } else {
             alert('Не удалось отредактировать митап');
@@ -100,10 +99,8 @@ export class CreateMeetupComponent implements OnInit{
           } else {
             alert('Не удалось создать митап')
           }
-          console.log('res=', res);
         })
       }
-
     }
   }
 
@@ -117,9 +114,8 @@ export class CreateMeetupComponent implements OnInit{
 
   getTime(date?: Date):string {
     if (date) {
-      const dateObj = new Date(date);
-      const hours = dateObj.getUTCHours();
-      const minutes = dateObj.getUTCMinutes();
+      const hours = ('0' + date.getUTCHours()).slice(-2)
+      const minutes = ('0' + date.getUTCMinutes()).slice(-2)
       return `${hours}:${minutes}`;
     } else return ''
   }
@@ -180,8 +176,6 @@ export class CreateMeetupComponent implements OnInit{
     const timeString = `${date}T${time}:00.000Z`
     return timeString;
   };
-
-
 }
 
 

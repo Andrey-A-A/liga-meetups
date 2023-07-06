@@ -12,12 +12,13 @@ import { AuthService } from './auth.service';
 export class MeetupService {
 
   baseUrl: string = `${environment.backendOrigin}/meetup`;
+  isEditMode: boolean = false;
+  private editableMeetup:Meetup | null = null
+  private meetups: Meetup[] = [ ]
 
   constructor(private http: HttpClient, private authService: AuthService) {
 
   }
-
-  private meetups: Meetup[] = [ ]
 
   getListHTTP() {
     return this.http
@@ -96,6 +97,14 @@ export class MeetupService {
 
   editMeetup(meetup: MeetupDTO) {
     return this.http.put<MeetupDTO>(`${this.baseUrl}/${meetup.id}`, meetup)
+  }
+
+  public set currentEditableMeetup(meetup:Meetup | null) {
+    this.editableMeetup = meetup
+  }
+
+  public get currentEditableMeetup():Meetup | null {
+    return this.editableMeetup
   }
 
 }

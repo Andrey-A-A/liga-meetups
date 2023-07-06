@@ -46,7 +46,8 @@ export class MeetupComponent {
     })
   }
   public edit() {
-    localStorage.setItem('meetupToEdit', JSON.stringify(this.meetup) )
+    this.meetupService.currentEditableMeetup = this.meetup;
+    this.meetupService.isEditMode = true;
     this.router.navigate(['meetup']);
   }
 
