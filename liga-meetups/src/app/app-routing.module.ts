@@ -8,6 +8,7 @@ import { UsersComponent } from './modules/users/users.component';
 import { RegistrationComponent } from './modules/auth/registration/registration.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { NonAuthGuard } from './shared/guards/non-auth.guard';
+import { StartPageComponent } from './modules/start-page/start-page.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
     component: RegistrationComponent,
     canActivate: [NonAuthGuard]
   },
+  {
+    path: '',
+    component: StartPageComponent
+  }
 ];
 
 @NgModule({
