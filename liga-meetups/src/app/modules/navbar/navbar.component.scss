@@ -11,12 +11,18 @@
     padding: 0 2.5rem;
     display: flex;
     align-items: center;
-    h1 {
-      font-family: 'Open Sans Hebrew Condensed', sans-serif;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 56px;
-      line-height: 76px;
+    a.logo {
+      color: $white;
+      &:hover {
+        color: $dark-indigo;
+      }
+      h1 {
+        font-family: 'Open Sans Hebrew Condensed', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 76px;
+      }
     }
   }
   &__logo {

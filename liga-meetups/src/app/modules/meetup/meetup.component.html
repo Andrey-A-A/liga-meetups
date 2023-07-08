@@ -5,7 +5,6 @@
     <div class="title">
       <h3>{{ meetup.title }}</h3>
     </div>
-
     <p>{{ meetup.subscribers }} подписчик</p>
     <div>
       {{ meetup.time | date:'dd.MM.yy HH:mm'}}
@@ -15,7 +14,9 @@
       <p *ngIf="meetup.status !== statusDone && !meetup.location" class="unknow">место неизвестно</p>
     </div>
   </div>
-  <div *ngIf="!isFull" class="description">{{meetup.description}}</div>
+  <div *ngIf="!isFull" class="description">
+    <p>{{meetup.description}}</p>
+  </div>
   <div *ngIf="isFull" class="fulldescription">
     <p>{{meetup.description}}</p>
     <h3>Целевая аудитория</h3>

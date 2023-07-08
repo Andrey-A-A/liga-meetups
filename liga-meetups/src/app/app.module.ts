@@ -12,6 +12,7 @@ import { JwtInterceptor } from './shared/interceptors/jwt.interceptors';
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { CreateMeetupComponent } from './modules/create-meetup/create-meetup.component';
 import { UsersModule } from './modules/users/users.module';
+import { StartPageComponent } from './modules/start-page/start-page.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { UsersModule } from './modules/users/users.module';
     AppComponent,
     NavbarComponent,
     CreateMeetupComponent,
+    StartPageComponent,
   ],
   imports: [
     BrowserModule,
