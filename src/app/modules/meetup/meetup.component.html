@@ -30,7 +30,7 @@
   </div>
   <div class="footer">
     <div>
-      <img src="../../../assets/men.svg" alt="автор" width="25px" height="25px">
+      <img src="assets/men.svg" alt="автор" width="25px" height="25px">
       <p>{{ meetup.author }}</p>
     </div>
     <div>
@@ -38,8 +38,8 @@
       <button *ngIf="meetup.status === statusNew && fromPage === fromMy && meetup.isOwner" class="btn" type="button" (click)="edit()">Редактировать</button>
       <button *ngIf="meetup.status === statusNew && fromPage === fromMy && meetup.isMember && !meetup.isOwner" class="btn notcome" type="button" (click)="unRegister()">Не смогу пойти</button>
       <button class="mark" type="button" (click)="fullContent()">
-        <img *ngIf="!isFull" src="../../../assets/check-down.png" alt="галочка">
-        <img *ngIf="isFull" src="../../../assets/check-up.png" alt="галочка">
+        <img *ngIf="!isFull" src="assets/check-down.png" alt="галочка">
+        <img *ngIf="isFull" src="assets/check-up.png" alt="галочка">
       </button>
     </div>
 
