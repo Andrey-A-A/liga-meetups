@@ -1,0 +1,15 @@
+@import '../../../sass/variables';
+
+div {
+  h1 {
+    text-align: center;
+    margin: 50px;
+  }
+  .pagination {
+    background: $gray;
+    border: 1px solid $dark;
+    margin: 44px auto 20px auto;
+    width: 95%;
+  }
+}
+

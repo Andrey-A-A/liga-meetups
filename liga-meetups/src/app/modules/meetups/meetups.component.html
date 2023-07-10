@@ -1,0 +1,17 @@
+<div>
+  <app-search (parentEvent)="searchTextUpdated($event)"></app-search>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+  <ul *ngIf="!isLoading">
+    <li *ngFor="let meetup of dataSource">
+      <app-meetup [meetup]="meetup" [fromPage]="fromPage"></app-meetup>
+    </li>
+  </ul>
+  <mat-paginator *ngIf="!isLoading" class="pagination" [length] = "filteredList.length"
+              [pageSizeOptions]="[5, 10, 20]"
+              [showFirstLastButtons]="true"
+              [pageSize]="pageSize"
+              aria-label = "Выберите страницу"
+              [pageIndex]="currentPage"
+              (page)="handlePage($event)" >
+  </mat-paginator >
+</div>

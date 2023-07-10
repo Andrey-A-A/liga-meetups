@@ -1,0 +1,41 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MeetupsModule } from './modules//meetups/meetups.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './modules/auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptors';
+import { NavbarComponent } from './modules/navbar/navbar.component';
+import { CreateMeetupComponent } from './modules/create-meetup/create-meetup.component';
+import { UsersModule } from './modules/users/users.module';
+import { StartPageComponent } from './modules/start-page/start-page.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    CreateMeetupComponent,
+    StartPageComponent,
+  ],
+  imports: [
+    BrowserModule,
+    MeetupsModule,
+    UsersModule,
+    AppRoutingModule,
+    FormsModule,
+    AuthModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

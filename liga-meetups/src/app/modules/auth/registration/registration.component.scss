@@ -1,0 +1,71 @@
+@import '../../../../sass/reset';
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+@import '../../../../sass/fonts';
+
+.login {
+  &__container {
+    width: 360px;
+    padding: 9px;
+    margin: 1rem auto;
+    input {
+      width: 100%;
+      border-radius: 5px;
+      color: $gray;
+      height: 50px;
+      background-color: $dark;
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 25px;
+      margin-top: 1.63rem;
+      padding-left: 5px;
+    }
+  }
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    a {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 25px;
+      text-decoration-line: underline;
+      color: #008697;
+      cursor: pointer;
+    }
+    button {
+      background: $indigo;
+      box-shadow: 0px 4px 4px rgba(62, 5, 4, 0.25);
+      border-radius: 5px;
+      width: 125px;
+      height: 49px;
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 25px;
+      color: $white;
+      cursor: pointer;
+      margin-top: 1.63rem;
+    }
+  }
+}
+
+.invalid-field {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+}
+
+div.error {
+  color: red;
+}
+
+input.ng-touched.ng-invalid{
+	border-color: red;
+}
