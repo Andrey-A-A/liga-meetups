@@ -1,0 +1,36 @@
+@import '../../../sass/reset';
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+@import '../../../sass/fonts';
+
+.wrap {
+  width: 95%;
+  margin: 10px auto;
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.13rem;
+  line-height: 1.56rem;
+  color: $gray;
+  h1 {
+    font-family: "Cherry Bomb", sans-serif;
+    font-size: 2rem;
+    line-height: 2rem;
+    color: $white;
+    margin: 2rem auto;
+  }
+  hr {
+    margin: 20px 0;
+    padding: 0;
+    height: 2px;
+    border: 2px solid $orange;
+  }
+  ul {
+    margin: 1rem;
+    list-style-type:square;
+    li {
+      margin-left: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+}

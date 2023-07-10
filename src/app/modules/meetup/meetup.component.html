@@ -1,0 +1,48 @@
+
+
+<div class="cont" *ngIf="meetup">
+  <div class="header">
+    <div class="title">
+      <h3>{{ meetup.title }}</h3>
+    </div>
+    <p>{{ meetup.subscribers }} подписчик</p>
+    <div>
+      {{ meetup.time | date:'dd.MM.yy HH:mm'}}
+      <p *ngIf="meetup.status !== statusNew">{{meetup.status}}</p>
+      <p *ngIf="meetup.status !== statusDone && meetup.location"
+      class="location">{{ meetup.location }}</p>
+      <p *ngIf="meetup.status !== statusDone && !meetup.location" class="unknow">место неизвестно</p>
+    </div>
+  </div>
+  <div *ngIf="!isFull" class="description">
+    <p>{{meetup.description}}</p>
+  </div>
+  <div *ngIf="isFull" class="fulldescription">
+    <p>{{meetup.description}}</p>
+    <h3>Целевая аудитория</h3>
+    <p>{{meetup.targetAudience}}</p>
+    <h3>Что надо знать?</h3>
+    <p>{{meetup.needToKnow}}</p>
+    <h3>Что будет?</h3>
+    <p>{{meetup.willHappen}}</p>
+    <h3>Почему надо обязательно прийти?</h3>
+    <p>{{meetup.reasonToCome}}</p>
+  </div>
+  <div class="footer">
+    <div>
+      <img src="../../../assets/men.svg" alt="автор" width="25px" height="25px">
+      <p>{{ meetup.author }}</p>
+    </div>
+    <div>
+      <button *ngIf="meetup.status === statusNew && fromPage === fromAll" class="btn" type="button" (click)="register()">Я пойду!</button>
+      <button *ngIf="meetup.status === statusNew && fromPage === fromMy && meetup.isOwner" class="btn" type="button" (click)="edit()">Редактировать</button>
+      <button *ngIf="meetup.status === statusNew && fromPage === fromMy && meetup.isMember && !meetup.isOwner" class="btn notcome" type="button" (click)="unRegister()">Не смогу пойти</button>
+      <button class="mark" type="button" (click)="fullContent()">
+        <img *ngIf="!isFull" src="../../../assets/check-down.png" alt="галочка">
+        <img *ngIf="isFull" src="../../../assets/check-up.png" alt="галочка">
+      </button>
+    </div>
+
+  </div>
+</div>
+
