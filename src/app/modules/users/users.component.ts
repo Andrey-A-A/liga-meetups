@@ -52,8 +52,6 @@ export class UsersComponent implements OnInit, OnDestroy{
   }
 
   public handlePage(e: any) {
-    console.log('e', e);
-
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.iterator();

@@ -23,7 +23,6 @@ export class SearchComponent implements OnInit {
     this.initForm()
 
     this.searchForm.get('text')?.valueChanges.pipe(debounceTime(2000)).subscribe((data) => {
-      console.log('data', data);
       this.parentEvent.emit(data)
     })
   }

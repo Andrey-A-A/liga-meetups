@@ -11,8 +11,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string) {
-    console.log('email=', email, ' / ','password=', password);
-
     return this.http
     .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
     .subscribe((res: any) => {
@@ -75,7 +73,7 @@ export class AuthService {
     if (token) {
       const user:User = this.parseJwt(token)
       user.roles.forEach(element => {
-        
+
         if (element.name === 'ADMIN') {
           result = true
         }
