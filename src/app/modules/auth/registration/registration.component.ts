@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
 
   registrationForm!: FormGroup
-  
+
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -41,26 +41,6 @@ export class RegistrationComponent implements OnInit {
     }
     return null;
   }
-
-  // confirmPassword(control: FormControl<string>): ValidationErrors | null {
-  //     const value = control.value;
-
-  //     if (control.parent?.controls && this.registrationForm) {
-  //       const a = control.parent?.controls
-  //       console.log('control.parent=', control.parent?.controls );
-  //       console.log('log', this.registrationForm.controls.password);
-
-  //     }
-
-
-
-
-  //     if (value === 'previous') {
-  //       return null
-  //     } else {
-  //       return { invalidPassword: 'Пароли не совпадают' };
-  //     }
-  // }
 
   isControlInvalid(controlName: string): boolean {
     const control = this.registrationForm.controls[controlName];

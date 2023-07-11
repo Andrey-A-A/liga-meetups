@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MeetupsModule } from './modules//meetups/meetups.module';
+import { MeetupsModule } from './modules/meetups/meetups.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

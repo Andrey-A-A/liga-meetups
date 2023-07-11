@@ -65,8 +65,6 @@ export class UserComponent implements OnInit {
     }
 
     if (newRole !== this.valueSelect) {
-      console.log('newRole=', newRole);
-
       const role = newRole === '2' ? ['ADMIN'] : ['USER'];
       this.userService.setRole(this.user.id, role).subscribe(
         (res) => {

@@ -44,8 +44,6 @@ export class MyMeetupsComponent implements OnInit {
         return this.meetupService.transform(el)
       })
 
-      console.log('myMeetupList', this.myMeetupList);
-
       this.dataSource = this.myMeetupList.slice(0, this.pageSize)
 
     })
@@ -53,8 +51,6 @@ export class MyMeetupsComponent implements OnInit {
   }
 
   public handlePage(e: any) {
-    console.log('e', e);
-
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.iterator();

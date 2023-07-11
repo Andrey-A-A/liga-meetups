@@ -73,8 +73,6 @@ export class MeetupsComponent implements OnInit, OnDestroy {
   }
 
   public handlePage(e: any) {
-    console.log('e', e);
-
     this.currentPage = e.pageIndex;
     this.pageSize = e.pageSize;
     this.iterator();
@@ -88,11 +86,9 @@ export class MeetupsComponent implements OnInit, OnDestroy {
   }
 
   searchTextUpdated(text: string) {
-    console.log('получили у родителя текст', text);
     this.filteredList = this.allList.filter(el => {
       return this.filterText(el?.description, text) || this.filterText(el.title, text) || this.filterText(el.author, text) || this.filterDate(el.time, text)
     })
-    console.log('filteredList', this.filteredList);
     this.iterator();
   }
 
@@ -108,7 +104,6 @@ export class MeetupsComponent implements OnInit, OnDestroy {
 
       const yearText = date.getUTCFullYear().toString().slice(-2);
       const dateText = `${dayText}.${monthText}.${yearText}`
-      console.log('dateText', dateText);
       return dateText === text
     } else {
       return false

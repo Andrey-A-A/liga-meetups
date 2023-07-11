@@ -168,7 +168,6 @@ export class CreateMeetupComponent implements OnInit{
             invalid.push(name);
         }
     }
-    console.log('invalid=', invalid);
     return invalid;
   }
 
