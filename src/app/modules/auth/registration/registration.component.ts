@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     const passwordValid = hasNumber && hasCapitalLetter && hasLowercaseLetter && isLengthValid;
 
     if (!passwordValid) {
-      return { invalidPassword: 'Пароль не прошел валидацию' };
+      return { invalidPassword: 'Пароль должен содержать заглавные, прописные латинские буквы, цифры, минимум 7 символов' };
     }
     return null;
   }
